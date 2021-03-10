@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText name;
     private EditText token;
     private String filePath;
-
+    private CheckBox safe_video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         token = findViewById(R.id.ed_token);
         tvRecordId = findViewById(R.id.tv_record_id);
         tvSpeed = findViewById(R.id.tv_speed);
+        safe_video = findViewById(R.id.safe_video);
 
         getStoragePermission();
         findViewById(R.id.tv_choose).setOnClickListener(new View.OnClickListener() {
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void uploadFile(String filePath) {
         if (getStoragePermission()) {
-            VhallUploadFile.getInstance().uploadFile(token.getText().toString().trim(), filePath, name.getText().toString(), new VHUploadCallBack() {
+            VhallUploadFile.getInstance().uploadFile(token.getText().toString().trim(), filePath, name.getText().toString(), safe_video.isChecked()?"1":"0",new VHUploadCallBack() {
                 @Override
                 public void onSuccess(String recordId) {
                     Toast.makeText(MainActivity.this, "上传成功  " + recordId, Toast.LENGTH_SHORT).show();
