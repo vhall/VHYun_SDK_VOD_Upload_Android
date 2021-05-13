@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText token;
     private String filePath;
     private CheckBox safe_video;
+    private TextView version;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 uploadFile(filePath);
             }
         });
+
+        version = findViewById(R.id.version);
+        version.setText(String.format("version %s",BuildConfig.VERSION_NAME));
     }
 
     private static final int REQUEST_STORAGE = 1;
